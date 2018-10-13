@@ -71,9 +71,9 @@ handleChange = event => {
 		componentWillUnmount() {
 		console.log("unmountting");
 
-			fetch('http://localhost:8080/api/immigrants', {
+			fetch('https://localhost:8080/api/immigrants', {
 	  method: 'POST',
-	  mode: 'cors',
+	  mode: 'no-cors',
 	  headers: {
 		'Accept': 'application/json',
 		'Content-Type': 'application/json',
@@ -94,7 +94,7 @@ handleNameChange = name => event => {
       [name]: event.target.value,
     });
   };
-  
+
   render() {
     const { classes } = this.props;
     const { open } = this.state;
@@ -104,7 +104,7 @@ handleNameChange = name => event => {
           <Typography variant="h4" gutterBottom>
             Find Answers
           </Typography>
-		
+
 		<Grid item xs={12}>
 			<FormControl  className={classes.formControl}>
 		  <TextField
