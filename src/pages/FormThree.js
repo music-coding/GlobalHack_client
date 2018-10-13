@@ -15,17 +15,12 @@ import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 
 
-<<<<<<< HEAD
 import { view} from 'react-easy-state'
 
 
 import Store from '../stores/store'
 
 
-
-=======
-import Store from '../stores/store'
->>>>>>> cd16bff2e3ccb7200ded39b267ef4fb21f3f5465
 
 const styles = theme => ({
   root: {
@@ -47,13 +42,7 @@ class FormThree extends React.Component {
     this.state = {needs: [], checked: []};
   }
 
-<<<<<<< HEAD
-  /*state = {
-     checked: [],
-   };*/
 
-=======
->>>>>>> cd16bff2e3ccb7200ded39b267ef4fb21f3f5465
    componentDidMount() {
 
        console.log("The self link is: " + Store.selfLink)

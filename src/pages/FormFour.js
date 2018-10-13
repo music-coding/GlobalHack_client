@@ -14,6 +14,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 
+import { view} from 'react-easy-state'
+
 
 import Store from '../stores/store'
 
