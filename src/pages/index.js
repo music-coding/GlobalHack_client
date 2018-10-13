@@ -78,6 +78,13 @@ handleChange = event => {
       step: this.state.step + 1
     })
   }
+
+  stepDown = () => {
+
+    this.setState({
+      step: this.state.step - 1
+    })
+  }
   render() {
     const { classes } = this.props;
     const { open } = this.state;
@@ -92,9 +99,13 @@ handleChange = event => {
          }
 
       <Grid item xs={12}>
+        <Button variant="outlined" className={classes.button} onClick={this.stepDown}>
+         Previous
+       </Button>
         <Button variant="outlined" className={classes.button} onClick={this.stepUp}>
          Next
        </Button>
+
       </Grid>
       </Grid>
 

@@ -5,6 +5,7 @@ const Store = {
   name: "",
   city:"",
   language:"",
+  isNeedorShare:"",
 
 }
 
