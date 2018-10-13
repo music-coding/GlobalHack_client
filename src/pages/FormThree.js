@@ -33,9 +33,23 @@ const styles = theme => ({
 
 
 class FormThree extends React.Component {
-  state = {
+
+  constructor(props) {
+	super(props);
+    this.state = {needs: [], checked: []};
+  }
+
+  /*state = {
      checked: [],
-   };
+   };*/
+   
+   componentDidMount() {
+    fetch('http://ehi-gh7.ddns.net:8080/api/needs')
+      .then(response => response.json())
+      .then(data => this.setState({ needs: data._embedded.needs }));
+	  //.then(data => alert(JSON.stringify(data)));
+	  //.then(data => alert(JSON.stringify(data)));
+  }
 
 componentWillUnmount() {
   console.log(this.state.checked)
@@ -66,7 +80,7 @@ componentWillUnmount() {
   render() {
     const { classes } = this.props;
     const { open } = this.state;
-    const needsList = ["Legal", "Medical", "Food", "School", "Transportation", "Recreation", "Housing", "Utilities", "ESL"]
+    //const needsList = ["Legal", "Medical", "Food", "School", "Transportation", "Recreation", "Housing", "Utilities", "ESL"]
 
 
     return (
@@ -77,21 +91,21 @@ componentWillUnmount() {
             Categories
           </Typography>
           <List>
-          {[0, 1, 2, 3,4,5,6,7,8].map(value => (
+          {this.state.needs.map(need => (
             <ListItem
-              key={value}
+              key={need._links.self.href}
               role={undefined}
               dense
               button
-              onClick={this.handleToggle(value)}
+              onClick={this.handleToggle(need._links.self.href)}
               className={classes.listItem}
             >
               <Checkbox
-                checked={this.state.checked.includes(value)}
+                checked={this.state.checked.includes(need._links.self.href)}
                 tabIndex={-1}
                 disableRipple
               />
-            <ListItemText primary={needsList[value]} />
+            <ListItemText primary={need.description} />
             </ListItem>
           ))}
         </List>

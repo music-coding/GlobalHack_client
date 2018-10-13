@@ -71,7 +71,7 @@ handleChange = event => {
 		componentWillUnmount() {
 		console.log("unmountting");
 
-			fetch('http://localhost:8080/api/immigrants', {
+			fetch('http://ehi-gh7.ddns.net:8080/api/immigrants', {
 	  method: 'POST',
 	  mode: 'cors',
 	  headers: {
