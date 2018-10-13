@@ -7,7 +7,7 @@ const Store = {
   language:"",
   isNeedHelp: "",
   url: "",
-
+  needsChecked: []
 }
 
 

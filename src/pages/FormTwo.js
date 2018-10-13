@@ -82,9 +82,6 @@ fetch(Store.url, {
 
   })
 });
-/*	client({method: 'GET', path: '/api/immigrants'}).done(response => {
-    this.setState({immigrants: response.entity._embedded.immigrants});
-  });*/
 }
 
 
