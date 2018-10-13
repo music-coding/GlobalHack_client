@@ -102,5 +102,5 @@ handleChange = event => {
 Index.propTypes = {
   classes: PropTypes.object.isRequired,
 };
-
+console.log('#someButton was clicked');
 export default withRoot(withStyles(styles)(Index));

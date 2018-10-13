@@ -11,7 +11,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Input from '@material-ui/core/Input';
 import Grid from '@material-ui/core/Grid';
-
+import TextField from '@material-ui/core/TextField';
 
 
 const styles = theme => ({
@@ -34,6 +34,7 @@ button: {
 class FormOne extends React.Component {
   state = {
     open: false,
+	name: '',
     city: '',
     language:'',
   };
@@ -46,6 +47,7 @@ handleChange = event => {
     this.setState({
       open: false,
     });
+	console.log("aattestttt");
   };
 
   handleClick = () => {
@@ -55,18 +57,61 @@ handleChange = event => {
   };
 
 
+	componentWillMount() {
+		console.log("ttestttt");
+		/*client({method: 'GET', path: '/api/immigrants'}).done(response => {
+			this.setState({immigrants: response.entity._embedded.immigrants});
+		});*/
+	};
+		componentWillUnmount() {
+		console.log("unmountting");
 
+			fetch('http://localhost:8080/api/immigrants', {
+	  method: 'POST',
+	  mode: 'cors',
+	  headers: {
+		'Accept': 'application/json',
+		'Content-Type': 'application/json',
+	  },
+	  body: JSON.stringify({
+		name: this.state.name,
+		city: this.state.city,
+		language: this.state.language,
+	  })
+	});
+	/*	client({method: 'GET', path: '/api/immigrants'}).done(response => {
+			this.setState({immigrants: response.entity._embedded.immigrants});
+		});*/
+	}
+
+handleNameChange = name => event => {
+    this.setState({
+      [name]: event.target.value,
+    });
+  };
+  
   render() {
     const { classes } = this.props;
     const { open } = this.state;
 
     return (
-    <Grid item xs={12}>
-
-        <Grid item xs={12}>
+	    <Grid item xs={12}>
           <Typography variant="h4" gutterBottom>
             Find Answers
           </Typography>
+		
+		<Grid item xs={12}>
+			<FormControl  className={classes.formControl}>
+		  <TextField
+          label="Name"
+          className={classes.textField}
+		  onChange={this.handleNameChange('name')}
+          value={this.state.name}
+          margin="normal"
+        />
+		</FormControl>
+      </Grid>
+        <Grid item xs={12}>
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="age-helper">City</InputLabel>
           <Select
@@ -100,8 +145,7 @@ handleChange = event => {
           </Select>
         </FormControl>
       </Grid>
-</Grid>
-
+	</Grid>
 
     );
   }
