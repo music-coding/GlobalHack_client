@@ -15,6 +15,8 @@ import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 
 
+import Store from '../stores/store'
+
 const styles = theme => ({
   root: {
     textAlign: 'center',
@@ -105,4 +107,4 @@ FormFour.propTypes = {
 };
 
 
-export default withRoot(withStyles(styles)(FormFour));
+export default withRoot(withStyles(styles)(view(FormFour)));

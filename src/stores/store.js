@@ -7,9 +7,13 @@ const Store = {
   language:"",
   isNeedHelp: "",
   url: "",
+<<<<<<< HEAD
   selfLink:"",
   urlList: []
 
+=======
+  needsChecked: []
+>>>>>>> cd16bff2e3ccb7200ded39b267ef4fb21f3f5465
 }
 
 window.store = Store
