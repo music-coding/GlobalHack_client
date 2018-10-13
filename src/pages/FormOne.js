@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {observer} from "mobx-react";
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
@@ -12,6 +13,10 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Input from '@material-ui/core/Input';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
+import { view ,store} from 'react-easy-state'
+
+
+import Store from '../stores/store'
 
 
 const styles = theme => ({
@@ -34,13 +39,23 @@ button: {
 class FormOne extends React.Component {
   state = {
     open: false,
-	name: '',
+	  name: '',
     city: '',
     language:'',
   };
 
-handleChange = event => {
-  this.setState({ [event.target.name]: event.target.value });
+handleChangeName = event => {
+  Store.name = event.target.value
+  console.log(Store.name)
+};
+
+handleChangeCity = event => {
+  Store.city =event.target.value
+
+};
+
+handleChangeLanguage = event => {
+  Store.language = event.target.value
 };
 
   handleClose = () => {
@@ -79,9 +94,9 @@ handleChange = event => {
 		'Content-Type': 'application/json',
 	  },
 	  body: JSON.stringify({
-		name: this.state.name,
-		city: this.state.city,
-		language: this.state.language,
+		name: Store.name,
+		city: Store.city,
+		language: Store.language,
 	  })
 	});
 	/*	client({method: 'GET', path: '/api/immigrants'}).done(response => {
@@ -94,7 +109,7 @@ handleNameChange = name => event => {
       [name]: event.target.value,
     });
   };
-  
+
   render() {
     const { classes } = this.props;
     const { open } = this.state;
@@ -104,14 +119,14 @@ handleNameChange = name => event => {
           <Typography variant="h4" gutterBottom>
             Find Answers
           </Typography>
-		
+
 		<Grid item xs={12}>
 			<FormControl  className={classes.formControl}>
 		  <TextField
           label="Name"
           className={classes.textField}
-		  onChange={this.handleNameChange('name')}
-          value={this.state.name}
+		      onChange={this.handleChangeName}
+          value= {Store.name}
           margin="normal"
         />
 		</FormControl>
@@ -120,8 +135,8 @@ handleNameChange = name => event => {
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="age-helper">City</InputLabel>
           <Select
-            value={this.state.city}
-            onChange={this.handleChange}
+            value= {Store.city}
+            onChange={this.handleChangeCity}
             input={<Input name="city" id="age-helper" />}
           >
             <MenuItem value="">
@@ -137,8 +152,8 @@ handleNameChange = name => event => {
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="age-helper">Language</InputLabel>
           <Select
-            value={this.state.language}
-            onChange={this.handleChange}
+            value={Store.language}
+            onChange={this.handleChangeLanguage}
             input={<Input name="language" id="age-helper" />}
           >
             <MenuItem value="">
@@ -160,4 +175,4 @@ FormOne.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withRoot(withStyles(styles)(FormOne));
+export default withRoot(withStyles(styles)(view(FormOne)));

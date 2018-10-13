@@ -15,6 +15,10 @@ import TextField from '@material-ui/core/TextField';
 import ButtonBase from '@material-ui/core/ButtonBase';
 
 
+import { view} from 'react-easy-state'
+
+
+import Store from '../stores/store'
 
 const styles = theme => ({
   root: {
@@ -36,8 +40,15 @@ class FormTwo extends React.Component {
 
   };
 
-handleChange = event => {
-  this.setState({ question: event.target.value });
+handleChangeGive = event => {
+
+  Store.isNeedorShare = "give" ;
+  console.log(Store.isNeedorShare)
+};
+
+handleChangeNeed = event => {
+  Store.isNeedorShare = "need" ;
+  console.log(Store.isNeedorShare)
 };
 
   handleClose = () => {
@@ -70,14 +81,14 @@ handleChange = event => {
           </Typography>
           <Grid item xs={12} align='center'>
           <Grid item xs={6} className={classes.buttonStyle} >
-            <Button variant="contained" color="primary" className={classes.button} fullWidth>
+            <Button variant="contained" color={Store.isNeedorShare=='give' ? 'primary' : 'inherit'} onClick={this.handleChangeGive} className={classes.button}  fullWidth>
               Give Help
             </Button>
            </Grid>
            </Grid>
            <Grid item xs={12} align='center'>
            <Grid item xs={6} className={classes.buttonStyle}>
-             <Button variant="contained" color="primary" className={classes.button} fullWidth>
+             <Button variant="contained" color={Store.isNeedorShare=='need' ? 'primary' : 'inherit'} className={classes.button} onClick={this.handleChangeNeed} fullWidth>
                Need Help
              </Button>
             </Grid>
@@ -94,4 +105,4 @@ FormTwo.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withRoot(withStyles(styles)(FormTwo));
+export default withRoot(withStyles(styles)(view(FormTwo)));

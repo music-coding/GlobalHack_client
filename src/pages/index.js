@@ -17,6 +17,7 @@ import Grid from '@material-ui/core/Grid';
 import FormOne from './FormOne'
 import FormTwo from './FormTwo'
 import FormThree from './FormThree'
+import FormFour from './FormFour'
 
 
 
@@ -41,6 +42,7 @@ class Index extends React.Component {
   state = {
     open: false,
     step: 1,
+    name:""
   };
 
 handleChange = event => {
@@ -76,6 +78,13 @@ handleChange = event => {
       step: this.state.step + 1
     })
   }
+
+  stepDown = () => {
+
+    this.setState({
+      step: this.state.step - 1
+    })
+  }
   render() {
     const { classes } = this.props;
     const { open } = this.state;
@@ -90,9 +99,13 @@ handleChange = event => {
          }
 
       <Grid item xs={12}>
+        <Button variant="outlined" className={classes.button} onClick={this.stepDown}>
+         Previous
+       </Button>
         <Button variant="outlined" className={classes.button} onClick={this.stepUp}>
          Next
        </Button>
+
       </Grid>
       </Grid>
 
