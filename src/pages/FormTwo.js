@@ -42,13 +42,15 @@ class FormTwo extends React.Component {
 
 handleChangeGive = event => {
 
-  Store.isNeedorShare = "give" ;
-  console.log(Store.isNeedorShare)
+  Store.isNeedHelp = false;
+  Store.url = "http://ehi-gh7.ddns.net:8080/api/helpers" ;
+
 };
 
 handleChangeNeed = event => {
-  Store.isNeedorShare = "need" ;
-  console.log(Store.isNeedorShare)
+  Store.isNeedHelp = true;
+  Store.url  = "http://ehi-gh7.ddns.net:8080/api/immigrants" ;
+
 };
 
   handleClose = () => {
@@ -64,6 +66,26 @@ handleChangeNeed = event => {
     });
   };
 
+  componentWillUnmount() {
+  console.log("unmountting" + Store.url);
+fetch(Store.url, {
+  method: 'POST',
+  mode: 'cors',
+  headers: {
+  'Accept': 'application/json',
+  'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+  name: Store.name,
+  city: Store.city,
+  language: Store.language,
+
+  })
+});
+/*	client({method: 'GET', path: '/api/immigrants'}).done(response => {
+    this.setState({immigrants: response.entity._embedded.immigrants});
+  });*/
+}
 
 
 
@@ -81,14 +103,14 @@ handleChangeNeed = event => {
           </Typography>
           <Grid item xs={12} align='center'>
           <Grid item xs={6} className={classes.buttonStyle} >
-            <Button variant="contained" color={Store.isNeedorShare=='give' ? 'primary' : 'inherit'} onClick={this.handleChangeGive} className={classes.button}  fullWidth>
+            <Button variant="contained" color={Store.isNeedHelp === false ? 'primary' : 'inherit'} onClick={this.handleChangeGive} className={classes.button}  fullWidth>
               Give Help
             </Button>
            </Grid>
            </Grid>
            <Grid item xs={12} align='center'>
            <Grid item xs={6} className={classes.buttonStyle}>
-             <Button variant="contained" color={Store.isNeedorShare=='need' ? 'primary' : 'inherit'} className={classes.button} onClick={this.handleChangeNeed} fullWidth>
+             <Button variant="contained" color={Store.isNeedHelp === true ? 'primary' : 'inherit'} className={classes.button} onClick={this.handleChangeNeed} fullWidth>
                Need Help
              </Button>
             </Grid>

@@ -13,7 +13,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Input from '@material-ui/core/Input';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import { view ,store} from 'react-easy-state'
+import { view} from 'react-easy-state'
 
 
 import Store from '../stores/store'
@@ -84,21 +84,21 @@ handleChangeLanguage = event => {
 		});*/
 	};
 		componentWillUnmount() {
-		console.log("unmountting");
-
-			fetch('http://ehi-gh7.ddns.net:8080/api/immigrants', {
-	  method: 'POST',
-	  mode: 'cors',
-	  headers: {
-		'Accept': 'application/json',
-		'Content-Type': 'application/json',
-	  },
-	  body: JSON.stringify({
-		name: Store.name,
-		city: Store.city,
-		language: Store.language,
-	  })
-	});
+	// 	console.log("unmountting");
+  //
+	// 		fetch('http://ehi-gh7.ddns.net:8080/api/immigrants', {
+	//   method: 'POST',
+	//   mode: 'cors',
+	//   headers: {
+	// 	'Accept': 'application/json',
+	// 	'Content-Type': 'application/json',
+	//   },
+	//   body: JSON.stringify({
+	// 	name: Store.name,
+	// 	city: Store.city,
+	// 	language: Store.language,
+	//   })
+	// });
 	/*	client({method: 'GET', path: '/api/immigrants'}).done(response => {
 			this.setState({immigrants: response.entity._embedded.immigrants});
 		});*/

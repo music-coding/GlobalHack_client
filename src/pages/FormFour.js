@@ -15,10 +15,6 @@ import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 
 
-
-
-
-
 const styles = theme => ({
   root: {
     textAlign: 'center',
