@@ -49,7 +49,7 @@ handleChangeGive = event => {
 
 handleChangeNeed = event => {
   Store.isNeedHelp = true;
-  Store.url  = "http://ehi-gh7.ddns.net:8080/api/immigrants" ;
+  Store.url  = "http://ehi-gh7.ddns.net:8080/api/immigrants/" ;
 
 };
 
@@ -81,10 +81,13 @@ fetch(Store.url, {
   language: Store.language,
 
   })
-});
+}).then(response => response.json())
+  .then(data => Store.selfLink = data._links.self.href)
 /*	client({method: 'GET', path: '/api/immigrants'}).done(response => {
     this.setState({immigrants: response.entity._embedded.immigrants});
   });*/
+
+  console.log(Store.selfLink)
 }
 
 

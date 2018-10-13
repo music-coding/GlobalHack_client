@@ -15,6 +15,10 @@ import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 
 
+import { view} from 'react-easy-state'
+
+
+import Store from '../stores/store'
 
 
 
@@ -42,8 +46,10 @@ class FormThree extends React.Component {
   /*state = {
      checked: [],
    };*/
-   
+
    componentDidMount() {
+
+       console.log("The self link is: " + Store.selfLink)
     fetch('http://ehi-gh7.ddns.net:8080/api/needs')
       .then(response => response.json())
       .then(data => this.setState({ needs: data._embedded.needs }));
@@ -52,26 +58,41 @@ class FormThree extends React.Component {
   }
 
 componentWillUnmount() {
-  console.log(this.state.checked)
+//   console.log("The self link is: " + Store.selfLink)
+
+var  urlListString = ""
+Store.urlList.forEach(urls => {
+  urlListString += urls + '\n'
+})
+console.log(urlListString)
+fetch(Store.selfLink + "/needs",{
+method: 'PUT',
+mode: 'cors',
+headers: {
+'Accept': 'text/url-list',
+'Content-Type': 'text/url-list',
+},
+body:urlListString
+})
+ .then(response => response.json())
+ .then(data => console.log(data));
+
 }
    handleToggle = value => () => {
      console.log(value)
-     const { checked } = this.state;
-     const currentIndex = checked.indexOf(value);
-     const newChecked = [...checked];
+     const currentIndex = Store.urlList.indexOf(value);
+     const newChecked = [...Store.urlList];
 
     if (currentIndex === -1) {
        newChecked.push(value);
-     } else if (this.state.checked[0] == undefined){
+     } else if (Store.urlList[0] == undefined){
        newChecked.push(value);
      } else{
        newChecked.splice(currentIndex, 1);
      }
 
-     this.setState({
-       checked: newChecked,
-     });
-            console.log(this.state.checked)
+    Store.urlList = newChecked
+            console.log(Store.urlList)
    };
 
 
@@ -101,7 +122,7 @@ componentWillUnmount() {
               className={classes.listItem}
             >
               <Checkbox
-                checked={this.state.checked.includes(need._links.self.href)}
+                checked={Store.urlList.includes(need._links.self.href)}
                 tabIndex={-1}
                 disableRipple
               />
@@ -123,4 +144,4 @@ FormThree.propTypes = {
 };
 
 
-export default withRoot(withStyles(styles)(FormThree));
+export default withRoot(withStyles(styles)(view(FormThree)));

@@ -7,8 +7,11 @@ const Store = {
   language:"",
   isNeedHelp: "",
   url: "",
+  selfLink:"",
+  urlList: []
 
 }
 
+window.store = Store
 
 export default store(Store)
