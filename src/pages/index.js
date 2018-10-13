@@ -16,6 +16,7 @@ import Grid from '@material-ui/core/Grid';
 //Components
 import FormOne from './FormOne'
 import FormTwo from './FormTwo'
+import FormThree from './FormThree'
 
 
 
@@ -64,6 +65,8 @@ handleChange = event => {
         return <FormOne />
       case 2:
         return <FormTwo />
+      case 3:
+        return <FormThree />
     }
   }
 

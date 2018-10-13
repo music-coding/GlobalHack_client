@@ -54,6 +54,11 @@ handleChange = event => {
     });
   };
 
+  componentWillUnmount() {
+  console.log("Success")
+}
+
+
 
 
   render() {
