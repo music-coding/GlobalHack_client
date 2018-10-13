@@ -55,7 +55,7 @@ componentWillUnmount() {
 //   console.log("The self link is: " + Store.selfLink)
 
 var  urlListString = ""
-Store.urlList.forEach(urls => {
+Store.needsList.forEach(urls => {
   urlListString += urls + '\n'
 })
 console.log(urlListString)
@@ -63,30 +63,29 @@ fetch(Store.selfLink + "/needs",{
 method: 'PUT',
 mode: 'cors',
 headers: {
-'Accept': 'text/url-list',
-'Content-Type': 'text/url-list',
+'Content-Type': 'text/uri-list',
 },
 body:urlListString
 })
- .then(response => response.json())
- .then(data => console.log(data));
+ .then(response => console.log(response))
+
 
 }
    handleToggle = value => () => {
      console.log(value)
-     const currentIndex = Store.urlList.indexOf(value);
-     const newChecked = [...Store.urlList];
+     const currentIndex = Store.needsList.indexOf(value);
+     const newChecked = [...Store.needsList];
 
     if (currentIndex === -1) {
        newChecked.push(value);
-     } else if (Store.urlList[0] == undefined){
+     } else if (Store.needsList[0] == undefined){
        newChecked.push(value);
      } else{
        newChecked.splice(currentIndex, 1);
      }
 
-    Store.urlList = newChecked
-            console.log(Store.urlList)
+    Store.needsList = newChecked
+            console.log(Store.needsList)
    };
 
 
@@ -116,7 +115,7 @@ body:urlListString
               className={classes.listItem}
             >
               <Checkbox
-                checked={Store.urlList.includes(need._links.self.href)}
+                checked={Store.needsList.includes(need._links.self.href)}
                 tabIndex={-1}
                 disableRipple
               />

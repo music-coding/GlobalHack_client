@@ -8,7 +8,7 @@ const Store = {
   isNeedHelp: "",
   url: "",
   selfLink:"",
-  urlList: []
+  needsList: []
 
 }
 
