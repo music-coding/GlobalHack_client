@@ -42,6 +42,7 @@ class Index extends React.Component {
   state = {
     open: false,
     step: 1,
+    name:""
   };
 
 handleChange = event => {
