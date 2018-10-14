@@ -78,6 +78,7 @@ fetch(Store.url, {
   body: JSON.stringify({
   name: Store.name,
   city: Store.city,
+  email: Store.email,
   language: Store.language,
 
   })

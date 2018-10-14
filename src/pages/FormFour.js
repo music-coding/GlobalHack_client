@@ -172,12 +172,9 @@ componentDidMount(){
                 <Typography variant="h5" component="h2">
                     {user.name}
                 </Typography>
-                <Typography component="p">
-
-              </Typography>
               </CardContent>
               <CardActions>
-                <Button size="small">Contact</Button>
+                <Button size="small">Contact: {user.email}</Button>
               </CardActions>
             </Card>
             </Grid>

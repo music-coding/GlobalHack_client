@@ -3,6 +3,7 @@ import { store } from 'react-easy-state'
 const Store = {
 
   name: "",
+  email:"",
   city:"",
   language:"",
   isNeedHelp: "",

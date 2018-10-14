@@ -49,6 +49,10 @@ handleChangeName = event => {
   console.log(Store.name)
 };
 
+handleChangeEmail = event => {
+  Store.email = event.target.value
+};
+
 handleChangeCity = event => {
   Store.city =event.target.value
 
@@ -57,6 +61,7 @@ handleChangeCity = event => {
 handleChangeLanguage = event => {
   Store.language = event.target.value
 };
+
 
   handleClose = () => {
     this.setState({
@@ -90,13 +95,13 @@ handleNameChange = name => event => {
     const { open } = this.state;
 
     return (
-	    <Grid item xs={12}>
+	    <Grid item xs={12} align='center'>
           <Typography variant="h4" gutterBottom>
             Find Answers
           </Typography>
 
-		<Grid item xs={12}>
-			<FormControl  className={classes.formControl}>
+		<Grid item xs={2}>
+			<FormControl  className={classes.formControl} fullWidth>
 		  <TextField
           label="Name"
           className={classes.textField}
@@ -105,14 +110,28 @@ handleNameChange = name => event => {
           margin="normal"
         />
 		</FormControl>
+
       </Grid>
-        <Grid item xs={12}>
-        <FormControl className={classes.formControl}>
+      <Grid item xs={2}>
+        <FormControl  className={classes.formControl} fullWidth>
+        <TextField
+            label="Email"
+            className={classes.textField}
+            onChange={this.handleChangeEmail}
+            value= {Store.email}
+            margin="normal"
+          />
+      </FormControl>
+
+  </Grid>
+        <Grid item xs={2}>
+        <FormControl className={classes.formControl} fullWidth>
           <InputLabel htmlFor="age-helper">City</InputLabel>
           <Select
             value= {Store.city}
             onChange={this.handleChangeCity}
             input={<Input name="city" id="age-helper" />}
+
           >
             <MenuItem value="">
               <em>None</em>
@@ -123,8 +142,8 @@ handleNameChange = name => event => {
           </Select>
         </FormControl>
       </Grid>
-      <Grid item xs={12}>
-        <FormControl className={classes.formControl}>
+      <Grid item xs={2}>
+        <FormControl className={classes.formControl} fullWidth>
           <InputLabel htmlFor="age-helper">Language</InputLabel>
           <Select
             value={Store.language}
