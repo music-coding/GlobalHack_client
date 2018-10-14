@@ -77,32 +77,7 @@ handleChangeLanguage = event => {
 
 
 
-	componentWillMount() {
-		console.log("ttestttt");
-		/*client({method: 'GET', path: '/api/immigrants'}).done(response => {
-			this.setState({immigrants: response.entity._embedded.immigrants});
-		});*/
-	};
-		componentWillUnmount() {
-	// 	console.log("unmountting");
-  //
-	// 		fetch('http://ehi-gh7.ddns.net:8080/api/immigrants', {
-	//   method: 'POST',
-	//   mode: 'cors',
-	//   headers: {
-	// 	'Accept': 'application/json',
-	// 	'Content-Type': 'application/json',
-	//   },
-	//   body: JSON.stringify({
-	// 	name: Store.name,
-	// 	city: Store.city,
-	// 	language: Store.language,
-	//   })
-	// });
-	/*	client({method: 'GET', path: '/api/immigrants'}).done(response => {
-			this.setState({immigrants: response.entity._embedded.immigrants});
-		});*/
-	}
+
 
 handleNameChange = name => event => {
     this.setState({

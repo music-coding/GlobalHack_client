@@ -69,6 +69,8 @@ handleChange = event => {
         return <FormTwo />
       case 3:
         return <FormThree />
+      case 4:
+        return <FormFour />
     }
   }
 

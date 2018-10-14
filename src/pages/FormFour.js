@@ -14,6 +14,10 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+
 import { view} from 'react-easy-state'
 
 
@@ -24,9 +28,24 @@ const styles = theme => ({
     textAlign: 'center',
     paddingTop: theme.spacing.unit * 20,
   },
-   buttonStyle: {
-     padding:20
-   }
+  card: {
+    minWidth: 275,
+
+  },
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+  CardContent: {
+    padding: 10
+  }
 });
 
 
@@ -37,9 +56,77 @@ class FormFour extends React.Component {
      checked: [],
    };
 
-componentWillUnmount() {
-  console.log(this.state.checked)
+componentDidMount(){
+  const isHelper = Store.isNeedHelp == true ? "helpers" : "immigrants";
+
+     console.log(Store.needsList)
+     Store.needsList.map(
+       apiCall => {
+         fetch(apiCall + "/users", {
+           method: 'GET',
+           mode: 'cors',
+           headers: {
+           'Accept': 'application/json',
+           'Content-Type': 'application/json',
+           }
+         }).then(response => response.json())
+           .then(data =>
+             { if(data._embedded[isHelper] != undefined){
+             data._embedded[isHelper].map(res => {if(res.city === Store.city && res.language === Store.language && Store.usersAlreadyPushed.includes(res._links.needs.href) != true)  {
+             Store.usersAlreadyPushed.push(res._links.needs.href)
+             // res.categories = this.getCategories(res._links.needs.href)
+
+             console.log(res)
+             Store.userMatchList.push(res)
+
+           }
+
+         }) }
+       Store.loading = false
+
+       })
+       }
+
+     )
+
+
+
+
+
+
+
+// Store.userMatchList.push(res._embedded.helpers)
+       console.log(Store.userMatchList)
+   }
+
+
+   getCategories(href){
+     var Categories = []
+     fetch(href, {
+       method: 'GET',
+       mode: 'cors',
+       headers: {
+       'Accept': 'application/json',
+       'Content-Type': 'application/json',
+       }
+     }).then(response => response.json())
+     .then(data => {
+              console.log(data)
+       Categories.push(data._embedded.needs.description)
+
+     })
+     console.log(Categories)
+     return Categories
+   }
+
+
+   removeDuplicates(myArr, prop) {
+    return myArr.filter((obj, pos, arr) => {
+        return arr.map(mapObj => mapObj[prop]).indexOf(obj[prop]) === pos;
+    });
 }
+
+
    handleToggle = value => () => {
      console.log(value)
      const { checked } = this.state;
@@ -66,34 +153,37 @@ componentWillUnmount() {
   render() {
     const { classes } = this.props;
     const { open } = this.state;
-    const needsList = ["Legal", "Medical", "Food", "School", "Transportation", "Recreation", "Housing", "Utilities", "ESL"]
+
 
 
     return (
     <Grid item xs={12} align='center'>
 
-        <Grid item xs={6}>
+        <Grid item xs={4}>
           <Typography variant="h4" gutterBottom>
-            Categories
+            People
           </Typography>
           <List>
-          {[0, 1, 2, 3,4,5,6,7,8].map(value => (
-            <ListItem
-              key={value}
-              role={undefined}
-              dense
-              button
-              onClick={this.handleToggle(value)}
-              className={classes.listItem}
-            >
-              <Checkbox
-                checked={this.state.checked.includes(value)}
-                tabIndex={-1}
-                disableRipple
-              />
-            <ListItemText primary={needsList[value]} />
-            </ListItem>
-          ))}
+            { Store.loading === true ? "" : Store.userMatchList.map(user =>
+              <Grid className={classes.CardContent}>
+              <Card className={classes.card}
+                key={user._links.self.href}>
+              <CardContent >
+                <Typography variant="h5" component="h2">
+                    {user.name}
+                </Typography>
+                <Typography component="p">
+
+              </Typography>
+              </CardContent>
+              <CardActions>
+                <Button size="small">Contact</Button>
+              </CardActions>
+            </Card>
+            </Grid>
+
+            )}
+
         </List>
 
       </Grid>

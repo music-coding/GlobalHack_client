@@ -8,7 +8,10 @@ const Store = {
   isNeedHelp: "",
   url: "",
   selfLink:"",
-  needsList: []
+  needsList: [],
+  userMatchList:[],
+  usersAlreadyPushed:[],
+  loading: true
 
 }
 
